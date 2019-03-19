@@ -8,7 +8,7 @@ public class ShapeSpawner : MonoBehaviour {
 
     public void SpawnShape()
     {
-        int shapeIndex = Random.Range(0,6);
+        int shapeIndex = Random.Range(0,5);
 
         Instantiate(shapes[shapeIndex], transform.position ,Quaternion.identity);
     }
