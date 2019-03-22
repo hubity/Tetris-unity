@@ -118,7 +118,7 @@ public class Shape : MonoBehaviour
     {
         foreach (Transform childBlock in transform)
         {
-            Vector2 vect = childBlock.position;
+            Vector2 vect = RoundVector(childBlock.position);
             if (!IsInBorder(vect))
             {
                 return false;
@@ -131,6 +131,12 @@ public class Shape : MonoBehaviour
         }
         return true;
     }
+
+    public Vector2 RoundVector(Vector2 vect)
+    {
+        return new Vector2(Mathf.Round(vect.x), Mathf.Round(vect.y));
+    }
+
     public static bool IsInBorder(Vector2 pos)
     {
         return ((int)pos.x >= 0 && (int)pos.x <= 8 && (int)pos.y >= 0);
@@ -151,11 +157,11 @@ public class Shape : MonoBehaviour
 
         foreach(Transform childBlock in transform)
         {
-            Vector2 vect = childBlock.position;
+            Vector2 vect = RoundVector(childBlock.position);
 
                 GameBoard.gameBoard[(int)vect.x, (int)vect.y] = childBlock;
 
-                Debug.Log("Cube At : " + (int)vect.x + " " + (int)vect.y);
+                Debug.Log("Cube At : " + vect.x + " " + vect.y);
         }
 
         GameBoard.PrintArray();

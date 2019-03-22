@@ -16,7 +16,7 @@ public class GameBoard : MonoBehaviour {
 
         for(int j = jMax; j >= 0; j--)
         {
-            for(int i = 0; j <= iMax; i++)
+            for(int i = 0; i <= iMax; i++)
             {
                 if (gameBoard[i, j] == null)
                 {
