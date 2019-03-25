@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shape : MonoBehaviour
 {
@@ -62,17 +63,28 @@ public class Shape : MonoBehaviour
             {
                 transform.position += new Vector3(0, 1, 0);
 
+                // Delete all full rows found
+                bool rowDeleted = GameBoard.DeleteAllFullRows();
+
+                // If you deleted a row verify that another doesn't
+                // exist
+                if (rowDeleted)
+                {
+                    GameBoard.DeleteAllFullRows();
+
+                    //creaseTextUIScore();
+                }
+
+                // Disconnect the script actions from the shape
                 enabled = false;
 
+                // Spawn another shape
                 FindObjectOfType<ShapeSpawner>().SpawnShape();
             }
             else
             {
                 UpdateGameBoard();
-
             }
-
-            Debug.Log(transform.position);
 
             lastMoveDown = Time.time;
         }
@@ -164,6 +176,16 @@ public class Shape : MonoBehaviour
                 Debug.Log("Cube At : " + vect.x + " " + vect.y);
         }
 
-        GameBoard.PrintArray();
+        //GameBoard.PrintArray();
+    }
+    void IncreaseTextUIScore()
+    {
+        var textUIComp = GameObject.Find("Score").GetComponent<Text>();
+
+        int score = int.Parse(textUIComp.text);
+
+        score++;
+
+        textUIComp.text = score.ToString();
     }
 }
